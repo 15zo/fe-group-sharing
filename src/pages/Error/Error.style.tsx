@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -14,12 +14,14 @@ export const Title = styled.h1`
   font-size: 5rem;
   font-weight: bold;
   margin-bottom: 30px;
+  color: #4e4b66;
 `;
 
 export const BoldMessage = styled.p`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 6px;
+  color: #4e4b66;
 `;
 
 export const Message = styled.p`
@@ -33,4 +35,5 @@ export const Button = styled.button`
   height: 64px;
   border-radius: 20px;
   font-size: 18px;
+  background-color: orange;
 `;
