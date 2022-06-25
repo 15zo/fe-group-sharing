@@ -4,3 +4,4 @@ export { default as Login } from "./Login";
 export { default as Main } from "./Main";
 export { default as Share } from "./Share";
 export { default as ShareDetail } from "./ShareDetail";
+export { default as Registration } from "./Registration";

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import { Layout } from "../../../components";
-import Header from "../../../components/common/Header";
+import { Layout } from "../../components";
+import Header from "../../components/common/Header";
 import Input from "./Input";
 
 interface Props {
@@ -11,15 +11,15 @@ interface Props {
 
 function Registration({ shareType }: Props) {
   const [values, setValues] = useState({
-    contents: "asdf",
-    endAt: new Date(),
+    contents: "",
+    endAt: "",
     file: new File([], ""),
-    location: "asdf",
+    location: "",
     maxPeopleNumber: 1,
     originalPrice: 2,
     price: 3,
-    region: "sadf",
-    title: "sdf",
+    region: "",
+    title: "",
   });
 
   const changeValues = async (
@@ -64,7 +64,7 @@ function Registration({ shareType }: Props) {
         <input
           type="file"
           accept="image/*"
-          style={{ display: "none" }}
+          style={{ display: "none", background: `url()` }}
           multiple={false}
         />
 
@@ -92,7 +92,7 @@ function Registration({ shareType }: Props) {
           </div>
 
           <div style={{ display: "flex", gap: "8px" }}>
-            <Input name="region" />
+            <Input name="region" value="서울/송파구" />
             <Input
               name="location"
               placeholder="쉐어 장소(ex: 강남역)"
@@ -101,7 +101,13 @@ function Registration({ shareType }: Props) {
             />
           </div>
 
-          <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+            }}
+          >
             <div
               style={{
                 display: "flex",

@@ -31,7 +31,7 @@ function Share({ shareType }: Props) {
         `${process.env.REACT_APP_URL}/api/items/${shareType}?page=${page}`
       );
 
-      setList(data);
+      setList((prev) => [...prev, ...data]);
     };
 
     fetchData();
