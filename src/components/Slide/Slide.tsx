@@ -23,7 +23,7 @@ function Slide() {
     <Slider {...settings}>
       {slideData.map(({ id, imageUrl }: any) => (
         <SlideItem key={id}>
-          <img src={imageUrl} alt="id" width={"344px"} />
+          <img src={imageUrl} alt="id" width={"328px"} />
         </SlideItem>
       ))}
     </Slider>

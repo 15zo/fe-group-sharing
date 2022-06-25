@@ -9,6 +9,7 @@ import { Delivery, Ingredient } from "./types";
 
 import LargeLogo from "../../assets/svg/logo-lg.svg";
 import Header from "../../components/common/Header";
+import WriteBanner from "../../components/common/WriteBanner";
 
 interface Props {
   shareType: "delivery" | "ingredient";
@@ -52,6 +53,7 @@ function Share({ shareType }: Props) {
   return (
     <Layout>
       <Header />
+      <WriteBanner />
 
       <div
         style={{

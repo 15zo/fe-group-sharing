@@ -1,11 +1,15 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-import Slide from "../../components/Slide";
-import Header from "../../components/common/Header";
-import Footer from "../../components/common/Footer";
-import WriteBanner from "../../components/common/WriteBanner";
+import Slide from '../../components/Slide';
+import Header from '../../components/common/Header';
+import Footer from '../../components/common/Footer';
+import WriteBanner from '../../components/common/WriteBanner';
+import del from '../../assets/svg/del.svg';
+import food from '../../assets/svg/food.svg';
+import spa from '../../assets/svg/sp.svg';
+import flr from '../../assets/svg/flr.svg';
 
 function Main() {
   const navigate = useNavigate();
@@ -19,26 +23,23 @@ function Main() {
         <NavigationSection>
           <NavigationTitle>Categories</NavigationTitle>
           <NavigationPlus>더보기</NavigationPlus>
-          <NavigationBtn
-            onClick={() => navigate("../delivery", { replace: true })}
-          >
+          <NavigationBtn1 onClick={() => navigate('../delivery', { replace: true })}>
             <span>적절한 1인분을 함께</span>
             배달쉐어
-          </NavigationBtn>
-          <NavigationBtn
-            onClick={() => navigate("../ingredient", { replace: true })}
-          >
+          </NavigationBtn1>
+          <NavigationBtn2 onClick={() => navigate('../ingredient', { replace: true })}>
             <span>적절한 1인분을 함께</span>
             재료쉐어
-          </NavigationBtn>
+          </NavigationBtn2>
         </NavigationSection>
         <Guide>
           <GuideTitle>1인가구 식생활 가이드</GuideTitle>
           <GuidePlus>더보기</GuidePlus>
+          <img src={spa} alt="" width={'124px'} height={'150px'} />
+          <img src={flr} alt="" width={'124px'} height={'150px'} />
         </Guide>
       </MainPart>
       <Footer />
-      <WriteBanner />
     </Wrapper>
   );
 }
@@ -71,6 +72,16 @@ const NavigationBtn = styled.button`
   font-weight: 700;
 `;
 
+const NavigationBtn1 = styled(NavigationBtn)`
+  z-index: 100;
+  background-image: url(${del});
+`;
+
+const NavigationBtn2 = styled(NavigationBtn)`
+  z-index: 100;
+  background-image: url(${food});
+`;
+
 const NavigationTitle = styled.span`
   position: absolute;
   color: black;
@@ -93,13 +104,16 @@ const Guide = styled.article`
   text-align: center;
   position: relative;
   margin: 40px;
+
+  img {
+    margin-top: 40px;
+  }
 `;
 
 const GuideTitle = styled.div`
   color: #000;
+  position: absolute;
   font-weight: 700;
-  text-align: center;
-  justify-content: center;
 `;
 const GuidePlus = styled.span`
   position: absolute;

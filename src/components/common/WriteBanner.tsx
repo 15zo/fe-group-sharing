@@ -34,7 +34,11 @@ function WriteBanner() {
   );
 }
 
-const Wrapper = styled.button``;
+const Wrapper = styled.button`
+  position: absolute;
+  top: 710px;
+  right: 360px;
+`;
 
 const FixBtn = styled.button`
   position: relative;

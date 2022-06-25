@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -91,7 +91,6 @@ function ShareDetail() {
                   {data?.originalPrice}
                 </span>
               </span>
-
               <div style={{ display: "flex", gap: "4px" }}>
                 <div
                   style={{
