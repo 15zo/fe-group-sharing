@@ -1,17 +1,22 @@
-import { RouteObject } from 'react-router-dom';
+import { RouteObject } from "react-router-dom";
 
-import { Error, NotFound, Login, Main } from '../pages';
-import ProtectedRoute from './ProtectedRoute';
-import RedirectRoute from './RedirectedRoute';
+import { Error, NotFound, Login, Main, Share } from "../pages";
+import ProtectedRoute from "./ProtectedRoute";
+import RedirectRoute from "./RedirectedRoute";
 
 export const routes: RouteObject[] = [
-  { path: '/', element: <RedirectRoute /> },
-  { path: '/login', element: <Login /> },
+  { path: "/", element: <RedirectRoute /> },
+  { path: "/login", element: <Login /> },
   // { path: '/callback', element: <LoginCallback /> },
-  { path: '/error', element: <Error /> },
+  { path: "/error", element: <Error /> },
   {
     element: <ProtectedRoute />,
-    children: [{ path: '/main', element: <Main /> }],
+    children: [{ path: "/main", element: <Main /> }],
   },
-  { path: '*', element: <NotFound /> },
+  // FIXME:
+  {
+    element: <ProtectedRoute />,
+    children: [{ path: "/share", element: <Share shareType="" /> }],
+  },
+  { path: "*", element: <NotFound /> },
 ];

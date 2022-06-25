@@ -1,10 +1,12 @@
 import * as S from "./Login.style";
 
+import LogoLarge from "../../assets/svg/logo-lg.svg";
+
 const Login = () => {
   return (
     <S.Wrapper>
       <h1>
-        <img src={""} alt="logo" />
+        <img src={LogoLarge} alt="logo" />
       </h1>
 
       <S.ButtonWrapper>

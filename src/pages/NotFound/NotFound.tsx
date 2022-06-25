@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 interface Props {}
 
 function NotFound({}: Props) {
-  return <></>
+  return <>Not Found</>;
 }
 
-export default NotFound
+export default NotFound;

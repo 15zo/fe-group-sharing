@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  margin-top: 60px;
+  margin-top: 6px;
 `;
 
 export const Button = styled.a`
