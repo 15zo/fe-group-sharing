@@ -11,7 +11,8 @@ export const LIST: Delivery[] = [
     filePath: LargeLogo,
     region: "아이템 1",
     maxPeopleNumber: 4,
-    contents: "asdf",
+    contents:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat enim est deleniti necessitatibus, dolorum laborum, corrupti mollitia blanditiis corporis doloremque autem amet, ullam maiores optio voluptatum. Quas odit natus nobis.",
     location: "",
   },
   {
@@ -23,7 +24,8 @@ export const LIST: Delivery[] = [
     filePath: LargeLogo,
     region: "아이템 1",
     maxPeopleNumber: 4,
-    contents: "asdf",
+    contents:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat enim est deleniti necessitatibus, dolorum laborum, corrupti mollitia blanditiis corporis doloremque autem amet, ullam maiores optio voluptatum. Quas odit natus nobis.",
     location: "",
   },
   {
@@ -35,7 +37,8 @@ export const LIST: Delivery[] = [
     filePath: LargeLogo,
     region: "아이템 1",
     maxPeopleNumber: 4,
-    contents: "asdf",
+    contents:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat enim est deleniti necessitatibus, dolorum laborum, corrupti mollitia blanditiis corporis doloremque autem amet, ullam maiores optio voluptatum. Quas odit natus nobis.",
     location: "",
   },
   {
@@ -47,7 +50,8 @@ export const LIST: Delivery[] = [
     filePath: LargeLogo,
     region: "아이템 1",
     maxPeopleNumber: 4,
-    contents: "asdf",
+    contents:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat enim est deleniti necessitatibus, dolorum laborum, corrupti mollitia blanditiis corporis doloremque autem amet, ullam maiores optio voluptatum. Quas odit natus nobis.",
     location: "",
   },
   {
@@ -59,7 +63,8 @@ export const LIST: Delivery[] = [
     filePath: LargeLogo,
     region: "아이템 1",
     maxPeopleNumber: 4,
-    contents: "asdf",
+    contents:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat enim est deleniti necessitatibus, dolorum laborum, corrupti mollitia blanditiis corporis doloremque autem amet, ullam maiores optio voluptatum. Quas odit natus nobis.",
     location: "",
   },
 ];
