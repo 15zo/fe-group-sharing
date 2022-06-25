@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import { useRoutes } from "react-router-dom";
+
+import { routes } from "./router/router";
 
 function App() {
-  return (
-    <div>
-      메인입니다.
-    </div>
-  );
+  const element = useRoutes(routes);
+
+  return <div>{element}</div>;
 }
 
 export default App;
