@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useAxios from "../../hooks/useAxios";
-import { useEffect, useState } from "react";
 
 function Slide() {
   const [slideData, setSlideData] = useState<any>([]);

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Layout } from "../../components";
 
 import * as S from "./Share.style";
-import { LIST } from "./mock";
 import { Delivery, Ingredient } from "./types";
 
 import LargeLogo from "../../assets/svg/logo-lg.svg";
@@ -15,6 +15,9 @@ interface Props {
 }
 
 function Share({ shareType }: Props) {
+  const navigate = useNavigate();
+  const { search } = useLocation();
+
   const [page, setPage] = useState(0);
   const [list, setList] = useState<Delivery[] | Ingredient[]>([]);
   const [loading, setLoading] = useState(false);
@@ -58,8 +61,34 @@ function Share({ shareType }: Props) {
           gap: "98px",
         }}
       >
-        <S.Input type="button" value="배달 쉐어" />
-        <S.Input type="button" value="재료 쉐어" />
+        <S.Input
+          type="button"
+          style={{
+            cursor: "pointer",
+            // FIXME:
+            borderBottom: search === "delivery" ? "2px solid black" : "",
+          }}
+          value="배달 쉐어"
+          onClick={() => {
+            navigate("/delivery");
+            setList([]);
+            setPage(0);
+          }}
+        />
+
+        <S.Input
+          type="button"
+          style={{
+            cursor: "pointer",
+            border: search === "ingredient" ? "2px solid gray" : "",
+          }}
+          value="재료 쉐어"
+          onClick={() => {
+            navigate("/ingredient");
+            setList([]);
+            setPage(0);
+          }}
+        />
       </div>
 
       <section
@@ -80,6 +109,9 @@ function Share({ shareType }: Props) {
               borderRadius: "8px",
             }}
             key={item?.id}
+            onClick={() =>
+              navigate(`../${shareType}/${item?.id}`, { replace: true })
+            }
           >
             <img
               style={{

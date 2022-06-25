@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
+import moment from "moment";
+import DatePicker from "react-datepicker";
 
 import { Layout } from "../../components";
 import Header from "../../components/common/Header";
 import Input from "./Input";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   shareType: "delivery" | "ingredient";
 }
 
 function Registration({ shareType }: Props) {
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     contents: "",
-    endAt: "",
     file: new File([], ""),
     location: "",
     maxPeopleNumber: 1,
@@ -22,11 +26,27 @@ function Registration({ shareType }: Props) {
     title: "",
   });
 
+  const [endAt, setEndAt] = useState(moment().format("YYYY-MM-dd"));
+
   const changeValues = async (
-    { target }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    { target }: React.ChangeEvent<HTMLInputElement>,
     idx?: number
   ) => {
-    // TODO:
+    const { name, value, files } = target;
+
+    if (files) {
+      const file = files[0];
+
+      setValues({
+        ...values,
+        file,
+      });
+    }
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
   };
 
   return (
@@ -46,7 +66,7 @@ function Registration({ shareType }: Props) {
 
           const formData = new FormData();
           formData.append("contents", values.contents);
-          formData.append("endAt", new Date(values.endAt).toISOString());
+          formData.append("endAt", new Date(endAt).toISOString());
           formData.append("file", values?.file);
           formData.append("location", values?.location);
           formData.append("maxPeopleNumber", `${values?.maxPeopleNumber}`);
@@ -59,14 +79,20 @@ function Registration({ shareType }: Props) {
             `${process.env.REACT_APP_URL}/api/items/${shareType}`,
             formData
           );
+
+          navigate("/delivery");
         }}
       >
-        <input
-          type="file"
-          accept="image/*"
-          style={{ display: "none", background: `url()` }}
-          multiple={false}
-        />
+        <div>
+          <Input
+            type="file"
+            name="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            multiple={false}
+            value={values.file.name}
+          />
+        </div>
 
         <div
           style={{
@@ -92,7 +118,7 @@ function Registration({ shareType }: Props) {
           </div>
 
           <div style={{ display: "flex", gap: "8px" }}>
-            <Input name="region" value="서울/송파구" />
+            <Input name="region" defaultValue="서울/송파구" readOnly />
             <Input
               name="location"
               placeholder="쉐어 장소(ex: 강남역)"
@@ -114,8 +140,14 @@ function Registration({ shareType }: Props) {
                 gap: "8px",
               }}
             >
-              <Input name="endAt" placeholder="D-00 일" value={values.endAt} />{" "}
-              <div
+              <Input
+                type="date"
+                name="endAt"
+                placeholder="D-00 일"
+                value={endAt}
+              />
+
+              {/* <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -128,7 +160,7 @@ function Registration({ shareType }: Props) {
                 }}
               >
                 까지
-              </div>
+              </div> */}
             </div>
 
             <div
@@ -138,12 +170,12 @@ function Registration({ shareType }: Props) {
               }}
             >
               <Input
-                name="location"
-                placeholder="쉐어 장소(ex: 강남역)"
+                name="maxPeopleNumber"
+                placeholder="모집 인원"
                 onChange={changeValues}
-                value={values.location}
+                value={values.maxPeopleNumber}
               />
-
+              {/* 
               <div
                 style={{
                   display: "flex",
@@ -157,13 +189,14 @@ function Registration({ shareType }: Props) {
                 }}
               >
                 명 모집
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
 
         <div style={{ minHeight: "236px" }}>
-          <textarea
+          <input
+            type="text"
             style={{
               fontFamily: "Pretendard",
               fontWeight: 400,
@@ -174,15 +207,13 @@ function Registration({ shareType }: Props) {
 
               display: "flex",
               width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
               letterSpacing: "0.4px",
               color: "#808080",
               minHeight: "236px",
             }}
             placeholder="내용을 입력해주세요"
             onChange={changeValues}
-          ></textarea>
+          />
         </div>
 
         <button

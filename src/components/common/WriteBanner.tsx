@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import writeIcon from '../../assets/svg/writeIcon.svg';
-import x_btn from '../../assets/svg/x_btn.svg';
-import recruit_1 from '../../assets/svg/recruit_1.svg';
-import recruit_2 from '../../assets/svg/recruit_2.svg';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import writeIcon from "../../assets/svg/writeIcon.svg";
+import x_btn from "../../assets/svg/x_btn.svg";
+import recruit_1 from "../../assets/svg/recruit_1.svg";
+import recruit_2 from "../../assets/svg/recruit_2.svg";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 function WriteBanner() {
   const navigate = useNavigate();
@@ -18,10 +18,10 @@ function WriteBanner() {
       {inOpen ? (
         <FixBtn>
           <img src={x_btn} alt="" width="100px" />
-          <button onClick={() => navigate('/Share')}>
+          <button onClick={() => navigate("/delivery")}>
             <img src={recruit_1} alt="" width="100px" />
           </button>
-          <button onClick={() => navigate('/ingredient')}>
+          <button onClick={() => navigate("/ingredient")}>
             <img src={recruit_2} alt="" width="100px" />
           </button>
         </FixBtn>

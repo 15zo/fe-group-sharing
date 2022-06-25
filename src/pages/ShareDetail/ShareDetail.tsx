@@ -5,7 +5,6 @@ import axios from "axios";
 import { Layout } from "../../components";
 import Header from "../../components/common/Header";
 import { Delivery, Ingredient } from "../Share/types";
-import { LIST } from "../Share/mock";
 
 function ShareDetail() {
   const { id } = useParams();
@@ -18,7 +17,7 @@ function ShareDetail() {
         `${process.env.REACT_APP_URL}/api/items/${id}`
       );
 
-      // setData(data);
+      setData(data);
     };
 
     fetchData();
@@ -28,117 +27,119 @@ function ShareDetail() {
     <Layout>
       <Header />
 
-      <section
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "24.5px",
-        }}
-      >
-        <img src={LIST[0].filePath} alt="" />
-
-        <div
+      {data && (
+        <section
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            gap: "2.89",
-
-            padding: "7px 24px",
+            gap: "24.5px",
           }}
         >
-          <div
-            style={{
-              fontFamily: "Pretendard",
-              fontWeight: 700,
-              fontSize: "18px",
-              lineHeight: "28px",
-              color: "#010101",
-            }}
-          >
-            {LIST[0]?.title}
-          </div>
+          <img src={data?.filePath} alt="" />
 
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: "2.89",
+
+              padding: "7px 24px",
             }}
           >
-            <span
+            <div
               style={{
                 fontFamily: "Pretendard",
-                fontWeight: 600,
-                fontSize: "15px",
-                lineHeight: "24px",
+                fontWeight: 700,
+                fontSize: "18px",
+                lineHeight: "28px",
                 color: "#010101",
               }}
             >
-              {LIST[0]?.price}원
+              {data?.title}
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <span
                 style={{
-                  display: "inline-block",
-                  marginLeft: "4px",
-                  fontFamily: "Poppins",
-                  fontWeight: 400,
-                  fontSize: "11px",
-                  lineHeight: "16px",
-                  textDecorationLine: "line-through",
-                  color: "#A8A8A8",
-                  opacity: 0.6,
+                  fontFamily: "Pretendard",
+                  fontWeight: 600,
+                  fontSize: "15px",
+                  lineHeight: "24px",
+                  color: "#010101",
                 }}
               >
-                원가 {LIST[0]?.originalPrice}
+                {data?.price}원
+                <span
+                  style={{
+                    display: "inline-block",
+                    marginLeft: "4px",
+                    fontFamily: "Poppins",
+                    fontWeight: 400,
+                    fontSize: "11px",
+                    lineHeight: "16px",
+                    textDecorationLine: "line-through",
+                    color: "#A8A8A8",
+                    opacity: 0.6,
+                  }}
+                >
+                  {data?.originalPrice}
+                </span>
               </span>
-            </span>
 
-            <div style={{ display: "flex", gap: "4px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "2px 8px",
-                  background: "#FF5C21",
-                  borderRadius: "4px",
-                }}
-              >
-                인원: {LIST[0]?.maxPeopleNumber - 1}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "2px 8px",
-                  background: "#FF5C21",
-                  borderRadius: "4px",
-                }}
-              >
-                장소: {LIST[0]?.region}
+              <div style={{ display: "flex", gap: "4px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "2px 8px",
+                    background: "#FF5C21",
+                    borderRadius: "4px",
+                  }}
+                >
+                  {data?.maxPeopleNumber - 1}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "2px 8px",
+                    background: "#FF5C21",
+                    borderRadius: "4px",
+                  }}
+                >
+                  {data?.region}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div
-          style={{
-            padding: "11px 16px",
-            fontFamily: "Pretendard",
-            fontWeight: 400,
-            fontSize: "13px",
-            lineHeight: "20px",
+          <div
+            style={{
+              padding: "11px 16px",
+              fontFamily: "Pretendard",
+              fontWeight: 400,
+              fontSize: "13px",
+              lineHeight: "20px",
 
-            display: "flex",
-            alignItems: "center",
-            letterSpacing: "0.4px",
+              display: "flex",
+              alignItems: "center",
+              letterSpacing: "0.4px",
 
-            color: "#757575",
-          }}
-        >
-          {LIST[0].contents}
-        </div>
-      </section>
+              color: "#757575",
+            }}
+          >
+            {data?.contents}
+          </div>
+        </section>
+      )}
     </Layout>
   );
 }
