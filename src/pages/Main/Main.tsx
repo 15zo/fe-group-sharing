@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Slide from "../../components/Slide";
 import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
+import WriteBanner from "../../components/common/WriteBanner";
 
 function Main() {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ function Main() {
         </Guide>
       </MainPart>
       <Footer />
+      <WriteBanner />
     </Wrapper>
   );
 }
