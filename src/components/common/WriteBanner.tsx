@@ -37,7 +37,7 @@ function WriteBanner() {
 const Wrapper = styled.button`
   position: absolute;
   top: 710px;
-  right: 360px;
+  right: 600px;
 `;
 
 const FixBtn = styled.button`

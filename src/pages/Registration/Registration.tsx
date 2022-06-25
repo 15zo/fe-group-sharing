@@ -19,14 +19,14 @@ function Registration({ shareType }: Props) {
     contents: "",
     file: new File([], ""),
     location: "",
-    maxPeopleNumber: 1,
-    originalPrice: 2,
-    price: 3,
-    region: "",
+    maxPeopleNumber: 0,
+    originalPrice: 0,
+    price: 0,
+    region: "서울/송파구",
     title: "",
   });
 
-  const [endAt, setEndAt] = useState(moment().format("YYYY-MM-dd"));
+  const [endAt, setEndAt] = useState(moment().format("YYYY-MM-DD"));
 
   const changeValues = async (
     { target }: React.ChangeEvent<HTMLInputElement>,
@@ -41,6 +41,10 @@ function Registration({ shareType }: Props) {
         ...values,
         file,
       });
+    }
+
+    if (name === "endAt") {
+      setEndAt(value);
     }
 
     setValues({
@@ -63,6 +67,9 @@ function Registration({ shareType }: Props) {
         }}
         onSubmit={async (e) => {
           e.preventDefault();
+
+          console.log("test");
+          console.log({ endAt });
 
           const formData = new FormData();
           formData.append("contents", values.contents);
@@ -91,6 +98,7 @@ function Registration({ shareType }: Props) {
             style={{ display: "none" }}
             multiple={false}
             value={values.file.name}
+            onChange={changeValues}
           />
         </div>
 
@@ -145,6 +153,7 @@ function Registration({ shareType }: Props) {
                 name="endAt"
                 placeholder="D-00 일"
                 value={endAt}
+                onChange={changeValues}
               />
 
               {/* <div

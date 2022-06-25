@@ -10,6 +10,7 @@ import { Delivery, Ingredient } from "./types";
 import LargeLogo from "../../assets/svg/logo-lg.svg";
 import Header from "../../components/common/Header";
 import WriteBanner from "../../components/common/WriteBanner";
+import Footer from "../../components/common/Footer";
 
 interface Props {
   shareType: "delivery" | "ingredient";
@@ -211,6 +212,7 @@ function Share({ shareType }: Props) {
         ))}
         <div ref={fetchMoreTrigger}></div>;
       </section>
+      <Footer />
     </Layout>
   );
 }
