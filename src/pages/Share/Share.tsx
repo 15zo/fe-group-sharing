@@ -10,49 +10,41 @@ import { Delivery, Ingredient } from "./types";
 import LargeLogo from "../../assets/svg/logo-lg.svg";
 import Header from "../../components/common/Header";
 
-// TODO: Infinite Scroll
-
 interface Props {
   shareType: "delivery" | "ingredient";
 }
 
-// const SIZE = 2;
-
 function Share({ shareType }: Props) {
-  // TODO: api get (shareType)
-  const [size, setSize] = useState(0);
+  const [page, setPage] = useState(0);
   const [list, setList] = useState<Delivery[] | Ingredient[]>([]);
-  const [currentList, setCurrentList] = useState<Delivery[] | Ingredient[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchMoreTrigger = useRef<HTMLInputElement>(null);
 
-  // const fetchMoreObserver = new IntersectionObserver(([{ isIntersecting }]) => {
-  //   if (isIntersecting) {
-  //     setSize(size + 10);
-  //     setCurrentList((currentList) => [...currentList, list.slice(size)]);
-  //   }
-  // });
+  const fetchMoreObserver = new IntersectionObserver(([{ isIntersecting }]) => {
+    if (isIntersecting) setPage((page) => page + 1);
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_URL}/api/items/${shareType}`
+        `${process.env.REACT_APP_URL}/api/items/${shareType}?page=${page}`
       );
 
       setList(data);
     };
 
     fetchData();
-  }, [shareType]);
+  }, [page, shareType]);
 
-  // useEffect(() => {
-  //   if (!fetchMoreTrigger.current) return;
+  useEffect(() => {
+    if (!fetchMoreTrigger.current) return;
 
-  //   fetchMoreObserver.observe(fetchMoreTrigger.current);
+    fetchMoreObserver.observe(fetchMoreTrigger.current);
 
-  //   return () => fetchMoreObserver.disconnect();
-  // }, [fetchMoreObserver]);
+    return () => fetchMoreObserver.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Layout>
@@ -77,7 +69,7 @@ function Share({ shareType }: Props) {
           gap: "16px",
         }}
       >
-        {LIST.map((item) => (
+        {list.map((item) => (
           <div
             style={{
               display: "flex",

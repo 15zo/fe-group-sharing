@@ -1,10 +1,10 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
-import Slide from '../../components/Slide';
-import Header from '../../components/common/Header';
-import Footer from '../../components/common/Footer';
+import Slide from "../../components/Slide";
+import Header from "../../components/common/Header";
+import Footer from "../../components/common/Footer";
 
 function Main() {
   const navigate = useNavigate();
@@ -18,12 +18,16 @@ function Main() {
         <NavigationSection>
           <NavigationTitle>Categories</NavigationTitle>
           <NavigationPlus>더보기</NavigationPlus>
-          <NavigationBtn onClick={() => navigate('11')}>
-            <span>적절한 1인분을 한께</span>
+          <NavigationBtn
+            onClick={() => navigate("../delivery", { replace: true })}
+          >
+            <span>적절한 1인분을 함께</span>
             배달쉐어
           </NavigationBtn>
-          <NavigationBtn onClick={() => navigate('22')}>
-            <span>적절한 1인분을 한께</span>
+          <NavigationBtn
+            onClick={() => navigate("../ingredient", { replace: true })}
+          >
+            <span>적절한 1인분을 함께</span>
             재료쉐어
           </NavigationBtn>
         </NavigationSection>
