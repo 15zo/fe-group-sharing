@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Layout } from "../../components";
 
-// FIXME: remove img
-import LargeLogo from "../../assets/svg/logo-lg.svg";
 import * as S from "./Share.style";
+import { LIST } from "./mock";
 
 // TODO: Infinite Scroll
 
@@ -11,50 +10,44 @@ interface Props {
   shareType: string;
 }
 
-const LIST = [
-  {
-    id: 0,
-    title: "제목입니다.",
-    price: 1234,
-    category: "재료",
-    endAt: new Date().toLocaleString(),
-    filePath: LargeLogo,
-    placeName: "아이템 1",
-    limit: 4,
-    userId: 123,
-  },
-  {
-    id: 1,
-    title: "제목입니다요.",
-    price: 1234,
-    category: "재료",
-    endAt: new Date().toLocaleString(),
-    filePath: LargeLogo,
-    placeName: "아이템 2",
-    limit: 4,
-    userId: 234,
-  },
-  {
-    id: 2,
-    title: "제목입니다요요",
-    price: 1234,
-    category: "재료",
-    endAt: new Date().toLocaleString(),
-    filePath: LargeLogo,
-    placeName: "아이템 3",
-    limit: 4,
-    userId: 345,
-  },
-];
-
 function Share({ shareType }: Props) {
   // TODO: api get (shareType)
+  const [page, setPage] = useState(0);
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchMoreTrigger = useRef<HTMLInputElement>(null);
+
+  const fetchMoreObserver = new IntersectionObserver(([{ isIntersecting }]) => {
+    if (isIntersecting) setPage((page) => page + 1);
+  });
+
+  // TODO: API CALL
+  useEffect(() => {
+    setLoading(true);
+
+    const list = LIST;
+
+    console.log(list);
+
+    // setList((prev) => [...prev, ...list]);
+
+    setLoading(false);
+  }, [page]);
+
+  useEffect(() => {
+    if (!fetchMoreTrigger.current) return;
+
+    fetchMoreObserver.observe(fetchMoreTrigger.current);
+
+    return () => fetchMoreObserver.disconnect();
+  }, []);
 
   return (
     <Layout>
       <section>
-        <input>배달 쉐어</input>
-        <input>재료 쉐어</input>
+        <input type="button" value="배달 쉐어" />
+        <input type="button" value="재료 쉐어" />
 
         <button>현 위치</button>
       </section>
@@ -82,6 +75,7 @@ function Share({ shareType }: Props) {
             </S.ItemBottom>
           </S.Item>
         ))}
+        <div ref={fetchMoreTrigger}></div>;
       </section>
     </Layout>
   );
