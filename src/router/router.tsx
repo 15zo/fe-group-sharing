@@ -16,7 +16,7 @@ export const routes: RouteObject[] = [
   // FIXME:
   {
     element: <ProtectedRoute />,
-    children: [{ path: "/share", element: <Share shareType="" /> }],
+    children: [{ path: "/share", element: <Share shareType="delivery" /> }],
   },
   { path: "*", element: <NotFound /> },
 ];

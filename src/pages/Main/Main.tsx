@@ -1,95 +1,107 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import logo_sm from '../../assets/svg/logo-sm.svg';
+
 import Slide from '../../components/Slide';
+import Header from '../../components/common/Header';
+import Footer from '../../components/common/Footer';
 
 function Main() {
   const navigate = useNavigate();
   return (
     <Wrapper>
-      <HeaderPart>
-        <img src={logo_sm} alt=""></img>
-        <HeaderBtn>버튼 1</HeaderBtn>
-        <HeaderBtn>버튼 2</HeaderBtn>
-      </HeaderPart>
+      <Header />
       <MainPart>
-        <SlideSection>{/* <Slide /> */}</SlideSection>
+        <SlideSection>
+          <Slide />
+        </SlideSection>
         <NavigationSection>
-          <NavigationBtn onClick={() => navigate('11')}>배달쉐어</NavigationBtn>
-          <NavigationBtn onClick={() => navigate('22')}>재료쉐어</NavigationBtn>
+          <NavigationTitle>Categories</NavigationTitle>
+          <NavigationPlus>더보기</NavigationPlus>
+          <NavigationBtn onClick={() => navigate('11')}>
+            <span>적절한 1인분을 한께</span>
+            배달쉐어
+          </NavigationBtn>
+          <NavigationBtn onClick={() => navigate('22')}>
+            <span>적절한 1인분을 한께</span>
+            재료쉐어
+          </NavigationBtn>
         </NavigationSection>
-        <Preview>
-          <A>
-            <span>1인가구 식생활 가이드</span>
-            <button>{'이동 >'}</button>
-          </A>
-        </Preview>
-        <Guide></Guide>
+        <Guide>
+          <GuideTitle>1인가구 식생활 가이드</GuideTitle>
+          <GuidePlus>더보기</GuidePlus>
+        </Guide>
       </MainPart>
+      <Footer />
     </Wrapper>
   );
 }
 
-const A = styled.div`
-  position: relative;
-  width: 85%;
-  background-color: #000;
-  text-align: center;
-  justify-content: center;
-  padding: 10px;
-  border-radius: 20px;
-
-  button {
-    position: absolute;
-    padding: 2px;
-    border: 1px solid #fff;
-    border-radius: 20px;
-    top: 7px;
-    right: 5px;
-  }
-`;
-
 const Wrapper = styled.div`
   width: 360px;
   margin: 0 auto;
-`;
-
-const HeaderPart = styled.header`
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  margin: 20px 0;
-`;
-
-const HeaderBtn = styled.button`
-  background-color: #000;
-  padding: 5px;
-  border-radius: 50px;
+  padding: 0 16px;
 `;
 
 const MainPart = styled.main``;
 
 const SlideSection = styled.section``;
-const SlideList = styled.ul``;
 const NavigationSection = styled.section`
   display: flex;
   justify-content: space-between;
   text-align: center;
-  margin: 30px;
+  position: relative;
+  margin: 40px;
 `;
 const NavigationBtn = styled.button`
-  background-color: #000;
+  span {
+    font-size: 12px;
+    color: orange;
+  }
+  border: 1px solid black;
+  margin-top: 30px;
+  color: black;
   padding: 20px 5px;
-  border-radius: 25px;
+  font-weight: 700;
 `;
 
-const Preview = styled.article`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
+const NavigationTitle = styled.span`
+  position: absolute;
+  color: black;
+  font-weight: 700;
+  font-size: 16px;
 `;
-const Guide = styled.article``;
+
+const NavigationPlus = styled.span`
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  color: gray;
+  opacity: 0.5;
+  font-size: 12px;
+`;
+
+const Guide = styled.article`
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  position: relative;
+  margin: 40px;
+`;
+
+const GuideTitle = styled.div`
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+  justify-content: center;
+`;
+const GuidePlus = styled.span`
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  color: gray;
+  opacity: 0.5;
+  font-size: 12px;
+`;
 
 export default Main;

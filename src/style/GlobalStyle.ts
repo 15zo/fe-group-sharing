@@ -14,7 +14,6 @@ const GlobalStyle = createGlobalStyle`
     overflow-y: scroll;
   }
   body {
-    margin: 0 16px;
     line-height: 1.5;
     height: 100%;
     color: #f7f7fc;

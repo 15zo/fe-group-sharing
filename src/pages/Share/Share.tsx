@@ -1,79 +1,169 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+
 import { Layout } from "../../components";
 
 import * as S from "./Share.style";
 import { LIST } from "./mock";
+import { Delivery, Ingredient } from "./types";
+
+import LargeLogo from "../../assets/svg/logo-lg.svg";
+import Header from "../../components/common/Header";
 
 // TODO: Infinite Scroll
 
 interface Props {
-  shareType: string;
+  shareType: "delivery" | "ingredient";
 }
+
+const SIZE = 10;
 
 function Share({ shareType }: Props) {
   // TODO: api get (shareType)
-  const [page, setPage] = useState(0);
-  const [list, setList] = useState([]);
+  const [size, setSize] = useState(0);
+  const [list, setList] = useState<Delivery[] | Ingredient[]>([]);
+  const [currentList, setCurrentList] = useState<Delivery[] | Ingredient[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchMoreTrigger = useRef<HTMLInputElement>(null);
 
-  const fetchMoreObserver = new IntersectionObserver(([{ isIntersecting }]) => {
-    if (isIntersecting) setPage((page) => page + 1);
-  });
-
-  // TODO: API CALL
-  useEffect(() => {
-    setLoading(true);
-
-    const list = LIST;
-
-    console.log(list);
-
-    // setList((prev) => [...prev, ...list]);
-
-    setLoading(false);
-  }, [page]);
+  // const fetchMoreObserver = new IntersectionObserver(([{ isIntersecting }]) => {
+  //   if (isIntersecting) {
+  //     setSize(size + 10);
+  //     setCurrentList((currentList) => [...currentList, list.slice(size)]);
+  //   }
+  // });
 
   useEffect(() => {
-    if (!fetchMoreTrigger.current) return;
+    const fetchData = async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_URL}/api/items/${shareType}`
+      );
 
-    fetchMoreObserver.observe(fetchMoreTrigger.current);
+      setList(data);
+    };
 
-    return () => fetchMoreObserver.disconnect();
-  }, []);
+    fetchData();
+  }, [shareType]);
+
+  // useEffect(() => {
+  //   if (!fetchMoreTrigger.current) return;
+
+  //   fetchMoreObserver.observe(fetchMoreTrigger.current);
+
+  //   return () => fetchMoreObserver.disconnect();
+  // }, [fetchMoreObserver]);
 
   return (
     <Layout>
-      <section>
-        <input type="button" value="배달 쉐어" />
-        <input type="button" value="재료 쉐어" />
+      <Header />
 
-        <button>현 위치</button>
-      </section>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-around",
+          gap: "98px",
+        }}
+      >
+        <S.Input type="button" value="배달 쉐어" />
+        <S.Input type="button" value="재료 쉐어" />
+      </div>
 
       <section>
         {LIST.map((item) => (
-          <S.Item key={item?.id}>
-            <S.ItemHeader>
-              <div>몇시 배달: {item?.endAt}</div>
-              <div>북마크 여부</div>
-            </S.ItemHeader>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
 
-            <S.ItemImage src={item?.filePath} alt="" />
+              padding: "0px 16px",
+              borderRadius: "8px",
+            }}
+            key={item?.id}
+          >
+            <img
+              style={{
+                width: "328px",
+                height: "150px",
+              }}
+              src={LargeLogo}
+              alt=""
+            />
 
-            <S.ItemBottom>
-              <div>
-                <span>제목: {item?.title}</span>
-                <span>가격: {item?.price}</span>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "2.89",
+
+                padding: "7px 24px",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "Pretendard",
+                  fontWeight: 700,
+                  fontSize: "18px",
+                  lineHeight: "28px",
+                  color: "#010101",
+                }}
+              >
+                {item?.title}
               </div>
 
-              <div>
-                <span>인원: {item?.limit - 1}</span>
-                <span>장소: {item?.placeName}</span>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "Pretendard",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                    lineHeight: "24px",
+                    color: "#010101",
+                  }}
+                >
+                  {item?.price}원
+                  <span
+                    style={{
+                      display: "inline-block",
+                      marginLeft: "4px",
+                      fontFamily: "Poppins",
+                      fontWeight: 400,
+                      fontSize: "11px",
+                      lineHeight: "16px",
+                      textDecorationLine: "line-through",
+                      color: "#A8A8A8",
+                      opacity: 0.6,
+                    }}
+                  >
+                    원가 {item?.originalPrice}
+                  </span>
+                </span>
               </div>
-            </S.ItemBottom>
-          </S.Item>
+
+              <div style={{ display: "flex", gap: "4px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    background: "#FF5C21",
+                    borderRadius: "4px",
+                  }}
+                >
+                  인원: {item?.maxPeopleNumber - 1}
+                </div>
+                <div>장소: {item?.region}</div>
+              </div>
+            </div>
+          </div>
         ))}
         <div ref={fetchMoreTrigger}></div>;
       </section>
