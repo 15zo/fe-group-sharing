@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import moment from "moment";
 
 import { Layout } from "../../../components";
 import Header from "../../../components/common/Header";
