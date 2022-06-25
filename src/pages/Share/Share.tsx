@@ -16,7 +16,7 @@ interface Props {
   shareType: "delivery" | "ingredient";
 }
 
-const SIZE = 10;
+// const SIZE = 2;
 
 function Share({ shareType }: Props) {
   // TODO: api get (shareType)
@@ -70,7 +70,13 @@ function Share({ shareType }: Props) {
         <S.Input type="button" value="재료 쉐어" />
       </div>
 
-      <section>
+      <section
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+        }}
+      >
         {LIST.map((item) => (
           <div
             style={{
@@ -117,7 +123,7 @@ function Share({ shareType }: Props) {
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
               >
                 <span
@@ -146,21 +152,33 @@ function Share({ shareType }: Props) {
                     원가 {item?.originalPrice}
                   </span>
                 </span>
-              </div>
 
-              <div style={{ display: "flex", gap: "4px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    background: "#FF5C21",
-                    borderRadius: "4px",
-                  }}
-                >
-                  인원: {item?.maxPeopleNumber - 1}
+                <div style={{ display: "flex", gap: "4px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "2px 8px",
+                      background: "#FF5C21",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    인원: {item?.maxPeopleNumber - 1}
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "2px 8px",
+                      background: "#FF5C21",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    장소: {item?.region}
+                  </div>
                 </div>
-                <div>장소: {item?.region}</div>
               </div>
             </div>
           </div>
