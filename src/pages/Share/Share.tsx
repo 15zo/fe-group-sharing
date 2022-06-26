@@ -7,10 +7,11 @@ import { Layout } from "../../components";
 import * as S from "./Share.style";
 import { Delivery, Ingredient } from "./types";
 
-import LargeLogo from "../../assets/svg/logo-lg.svg";
 import Header from "../../components/common/Header";
 import WriteBanner from "../../components/common/WriteBanner";
 import Footer from "../../components/common/Footer";
+import { calcTwoTimeDifference } from "../../utils";
+import moment from "moment";
 
 interface Props {
   shareType: "delivery" | "ingredient";
@@ -54,8 +55,6 @@ function Share({ shareType }: Props) {
   return (
     <Layout>
       <Header />
-      <WriteBanner />
-
       <div
         style={{
           width: "100%",
@@ -107,6 +106,7 @@ function Share({ shareType }: Props) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              position: "relative",
 
               padding: "0px 16px",
               borderRadius: "8px",
@@ -121,9 +121,24 @@ function Share({ shareType }: Props) {
                 width: "328px",
                 height: "150px",
               }}
-              src={LargeLogo}
+              src={item?.fileUrl}
               alt=""
             />
+
+            <div
+              style={{
+                height: "24px",
+                backgroundColor: "#000000",
+                opacity: "0.7",
+                borderRadius: "4px",
+                color: "#F5F5F5",
+                padding: "0 10px",
+              }}
+            >
+              {shareType === "delivery"
+                ? `${moment(item?.endAt).format("YYYY-MM-DD")} 배달 `
+                : `D-${calcTwoTimeDifference(new Date(item?.endAt))} 일까지`}
+            </div>
 
             <div
               style={{
@@ -191,7 +206,7 @@ function Share({ shareType }: Props) {
                       borderRadius: "4px",
                     }}
                   >
-                    인원: {item?.maxPeopleNumber - 1}
+                    {item?.maxPeopleNumber - 1}명
                   </div>
                   <div
                     style={{
@@ -203,7 +218,7 @@ function Share({ shareType }: Props) {
                       borderRadius: "4px",
                     }}
                   >
-                    장소: {item?.region}
+                    {item?.region}
                   </div>
                 </div>
               </div>
@@ -212,6 +227,7 @@ function Share({ shareType }: Props) {
         ))}
         <div ref={fetchMoreTrigger}></div>;
       </section>
+      <WriteBanner />
       <Footer />
     </Layout>
   );

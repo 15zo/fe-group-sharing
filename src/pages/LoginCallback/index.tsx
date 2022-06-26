@@ -26,7 +26,6 @@ const LoginCallback = () => {
       },
     },
   });
-  console.log(response);
 
   useEffect(() => {
     if (response) {

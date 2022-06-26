@@ -18,10 +18,10 @@ function WriteBanner() {
       {inOpen ? (
         <FixBtn>
           <img src={x_btn} alt="" width="100px" />
-          <button onClick={() => navigate("/delivery")}>
+          <button onClick={() => navigate("/regist/delivery")}>
             <img src={recruit_1} alt="" width="100px" />
           </button>
-          <button onClick={() => navigate("/ingredient")}>
+          <button onClick={() => navigate("/regist/ingredient")}>
             <img src={recruit_2} alt="" width="100px" />
           </button>
         </FixBtn>

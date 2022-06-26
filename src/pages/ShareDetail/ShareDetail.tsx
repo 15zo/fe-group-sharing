@@ -35,7 +35,7 @@ function ShareDetail() {
             gap: "24.5px",
           }}
         >
-          <img src={data?.filePath} alt="" />
+          <img src={data?.fileUrl} alt="" />
 
           <div
             style={{

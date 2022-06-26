@@ -6,14 +6,13 @@ import DatePicker from "react-datepicker";
 import { Layout } from "../../components";
 import Header from "../../components/common/Header";
 import Input from "./Input";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-interface Props {
-  shareType: "delivery" | "ingredient";
-}
-
-function Registration({ shareType }: Props) {
+function Registration() {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  console.log(location.pathname);
 
   const [values, setValues] = useState({
     contents: "",
@@ -59,7 +58,6 @@ function Registration({ shareType }: Props) {
 
       <form
         style={{
-          width: "100%",
           display: "flex",
           flexDirection: "column",
           gap: "16px",
@@ -68,8 +66,7 @@ function Registration({ shareType }: Props) {
         onSubmit={async (e) => {
           e.preventDefault();
 
-          console.log("test");
-          console.log({ endAt });
+          navigate("/delivery");
 
           const formData = new FormData();
           formData.append("contents", values.contents);
@@ -83,11 +80,11 @@ function Registration({ shareType }: Props) {
           formData.append("title", `${values?.title}`);
 
           await axios.post(
-            `${process.env.REACT_APP_URL}/api/items/${shareType}`,
+            `${process.env.REACT_APP_URL}/api/items/${
+              location.pathname.split("/")[2]
+            }`,
             formData
           );
-
-          navigate("/delivery");
         }}
       >
         <div>
@@ -206,6 +203,7 @@ function Registration({ shareType }: Props) {
         <div style={{ minHeight: "236px" }}>
           <input
             type="text"
+            name="contents"
             style={{
               fontFamily: "Pretendard",
               fontWeight: 400,

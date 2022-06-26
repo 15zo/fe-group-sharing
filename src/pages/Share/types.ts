@@ -1,7 +1,7 @@
 export interface Delivery {
   contents: string;
   endAt: string;
-  filePath: string;
+  fileUrl: string;
   id: number;
   location: string;
   maxPeopleNumber: number;
@@ -14,7 +14,7 @@ export interface Delivery {
 export interface Ingredient {
   contents: string;
   endAt: string;
-  filePath: string;
+  fileUrl: string;
   string: string;
   id: number;
   location: string;
