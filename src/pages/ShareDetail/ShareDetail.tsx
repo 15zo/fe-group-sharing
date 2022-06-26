@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-import { Layout } from "../../components";
-import Header from "../../components/common/Header";
-import { Delivery, Ingredient } from "../Share/types";
+import { Layout } from '../../components';
+import Header from '../../components/common/Header';
+import { Delivery, Ingredient } from '../Share/types';
 
 function ShareDetail() {
   const { id } = useParams();
@@ -13,9 +13,7 @@ function ShareDetail() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_URL}/api/items/${id}`
-      );
+      const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/items/${id}`);
 
       setData(data);
     };
@@ -30,30 +28,30 @@ function ShareDetail() {
       {data && (
         <section
           style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "24.5px",
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '24.5px',
           }}
         >
           <img src={data?.filePath} alt="" />
 
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              gap: "2.89",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              gap: '2.89',
 
-              padding: "7px 24px",
+              padding: '7px 24px',
             }}
           >
             <div
               style={{
-                fontFamily: "Pretendard",
+                fontFamily: 'Pretendard',
                 fontWeight: 700,
-                fontSize: "18px",
-                lineHeight: "28px",
-                color: "#010101",
+                fontSize: '18px',
+                lineHeight: '28px',
+                color: '#010101',
               }}
             >
               {data?.title}
@@ -61,30 +59,30 @@ function ShareDetail() {
 
             <div
               style={{
-                display: "flex",
-                justifyContent: "space-between",
+                display: 'flex',
+                justifyContent: 'space-between',
               }}
             >
               <span
                 style={{
-                  fontFamily: "Pretendard",
+                  fontFamily: 'Pretendard',
                   fontWeight: 600,
-                  fontSize: "15px",
-                  lineHeight: "24px",
-                  color: "#010101",
+                  fontSize: '15px',
+                  lineHeight: '24px',
+                  color: '#010101',
                 }}
               >
                 {data?.price}원
                 <span
                   style={{
-                    display: "inline-block",
-                    marginLeft: "4px",
-                    fontFamily: "Poppins",
+                    display: 'inline-block',
+                    marginLeft: '4px',
+                    fontFamily: 'Poppins',
                     fontWeight: 400,
-                    fontSize: "11px",
-                    lineHeight: "16px",
-                    textDecorationLine: "line-through",
-                    color: "#A8A8A8",
+                    fontSize: '11px',
+                    lineHeight: '16px',
+                    textDecorationLine: 'line-through',
+                    color: '#A8A8A8',
                     opacity: 0.6,
                   }}
                 >
@@ -92,27 +90,27 @@ function ShareDetail() {
                 </span>
               </span>
 
-              <div style={{ display: "flex", gap: "4px" }}>
+              <div style={{ display: 'flex', gap: '4px' }}>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: "2px 8px",
-                    background: "#FF5C21",
-                    borderRadius: "4px",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: '2px 8px',
+                    background: '#FF5C21',
+                    borderRadius: '4px',
                   }}
                 >
                   {data?.maxPeopleNumber - 1}
                 </div>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: "2px 8px",
-                    background: "#FF5C21",
-                    borderRadius: "4px",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: '2px 8px',
+                    background: '#FF5C21',
+                    borderRadius: '4px',
                   }}
                 >
                   {data?.region}
@@ -123,17 +121,17 @@ function ShareDetail() {
 
           <div
             style={{
-              padding: "11px 16px",
-              fontFamily: "Pretendard",
+              padding: '11px 16px',
+              fontFamily: 'Pretendard',
               fontWeight: 400,
-              fontSize: "13px",
-              lineHeight: "20px",
+              fontSize: '13px',
+              lineHeight: '20px',
 
-              display: "flex",
-              alignItems: "center",
-              letterSpacing: "0.4px",
+              display: 'flex',
+              alignItems: 'center',
+              letterSpacing: '0.4px',
 
-              color: "#757575",
+              color: '#757575',
             }}
           >
             {data?.contents}

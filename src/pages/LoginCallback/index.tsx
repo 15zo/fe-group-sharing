@@ -26,7 +26,6 @@ const LoginCallback = () => {
       },
     },
   });
-  console.log(response);
 
   useEffect(() => {
     if (response) {
@@ -38,7 +37,7 @@ const LoginCallback = () => {
 
   if (error)
     return <Navigate to={'/error'} state={{ message: ' 로그인에 실패했습니다' }} replace />;
-  else if (idToken) return <Navigate to={'/issue-list'} replace />;
+  else if (idToken) return <Navigate to={'/main'} replace />;
   else return <Loading />;
 };
 
